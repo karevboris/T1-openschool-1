@@ -1,13 +1,12 @@
 package com.openschool.hw.controller;
 
 import com.openschool.hw.aspect.annotation.Logging;
-import com.openschool.hw.model.Task;
+import com.openschool.hw.dto.TaskDto;
 import com.openschool.hw.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
@@ -21,26 +20,26 @@ public class TaskController {
 
     @Logging
     @GetMapping
-    public List<Task> findAll() {
+    public List<TaskDto> findAll() {
         return taskService.findAll();
     }
 
     @Logging
     @GetMapping("/{id}")
-    public Optional<Task> findById(@PathVariable Long id) {
+    public TaskDto findById(@PathVariable Long id) {
         return taskService.findById(id);
     }
 
     @Logging
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Task create(@RequestBody Task task) {
+    public TaskDto create(@RequestBody TaskDto task) {
         return taskService.save(task);
     }
 
     @Logging
     @PutMapping
-    public Task update(@RequestBody Task task) {
+    public TaskDto update(@RequestBody TaskDto task) {
         return taskService.save(task);
     }
 
