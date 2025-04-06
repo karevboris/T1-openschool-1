@@ -1,7 +1,7 @@
 package com.openschool.hw.aspect;
 
 import com.openschool.hw.aspect.exception.CustomException;
-import com.openschool.hw.model.Task;
+import com.openschool.hw.dto.TaskDto;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,7 +9,6 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Aspect
@@ -25,22 +24,20 @@ public class LogAspect {
     }
 
     @AfterReturning(value = "@annotation(com.openschool.hw.aspect.annotation.Logging)", returning = "task")
-    public void logResult(JoinPoint joinPoint, Task task) {
-        logMethodResult(joinPoint, task);
-    }
-
-    @AfterReturning(value = "@annotation(com.openschool.hw.aspect.annotation.Logging)", returning = "task")
-    public void logResult(JoinPoint joinPoint, Optional<Task> task) {
-        logMethodResult(joinPoint, task.orElse(null));
+    public void logResult(JoinPoint joinPoint, TaskDto task) {
+        log.info("Method {}#{} returned {}",
+                joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName(),
+                task);
     }
 
     @AfterReturning(value = "@annotation(com.openschool.hw.aspect.annotation.Logging)", returning = "tasks")
-    public void logResult(JoinPoint joinPoint, List<Task> tasks) {
+    public void logResult(JoinPoint joinPoint, List<TaskDto> tasks) {
         log.info("Method {}#{} returned {} tasks with ids: {}",
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),
                 tasks.size(),
-                tasks.stream().map(Task::getId).collect(Collectors.toList()));
+                tasks.stream().map(TaskDto::getId).collect(Collectors.toList()));
     }
 
     @AfterThrowing(value = "@annotation(com.openschool.hw.aspect.annotation.Logging)", throwing = "exception")
@@ -67,12 +64,5 @@ public class LogAspect {
                     endTime - startTime);
         }
         return result;
-    }
-
-    protected void logMethodResult(JoinPoint joinPoint, Task task) {
-        log.info("Method {}#{} returned {}",
-                joinPoint.getSignature().getDeclaringTypeName(),
-                joinPoint.getSignature().getName(),
-                task);
     }
 }
