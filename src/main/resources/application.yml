@@ -6,3 +6,26 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     database: postgresql
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: karevboris333@gmail.com
+    password:
+    properties:
+      mail: { smtp: { auth: true, starttls: { enable: true } } }
+
+task:
+  scan-path: com.openschool.hw
+  kafka:
+    bootstrap:
+      server: localhost:9092
+    consumer:
+      group-id: task
+      max.poll.records: 10
+    producer:
+      enable: true
+    topic:
+      updating: task_updating
+      email_notification: task_email_notification
+    listener:
+      poll-timeout: 1000

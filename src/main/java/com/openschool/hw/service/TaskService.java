@@ -1,24 +1,27 @@
 package com.openschool.hw.service;
 
 import com.openschool.hw.dto.TaskDto;
+import com.openschool.hw.kafka.KafkaTaskProducer;
 import com.openschool.hw.model.Task;
 import com.openschool.hw.repository.TaskRepository;
 import com.openschool.hw.utils.TaskMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class TaskService {
 
     private final TaskMapper taskMapper;
     private final TaskRepository taskRepository;
+    private final KafkaTaskProducer kafkaTaskProducer;
 
-    public TaskService(TaskMapper taskMapper, TaskRepository taskRepository) {
-        this.taskMapper = taskMapper;
-        this.taskRepository = taskRepository;
-    }
+    @Value("${task.kafka.topic.updating}")
+    private String topic;
 
     public List<TaskDto> findAll() {
         return taskRepository.findAll().stream().map(taskMapper::mapToDto).collect(Collectors.toList());
@@ -31,6 +34,8 @@ public class TaskService {
 
     public TaskDto save(TaskDto task) {
         Task savedTask = taskRepository.save(taskMapper.mapToTask(task));
+
+        kafkaTaskProducer.sendTo(topic, savedTask);
         return taskMapper.mapToDto(savedTask);
     }
 

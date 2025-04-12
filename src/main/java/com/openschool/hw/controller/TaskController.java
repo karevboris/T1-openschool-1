@@ -3,6 +3,7 @@ package com.openschool.hw.controller;
 import com.openschool.hw.aspect.annotation.Logging;
 import com.openschool.hw.dto.TaskDto;
 import com.openschool.hw.service.TaskService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
+@RequiredArgsConstructor
 public class TaskController {
 
     private final TaskService taskService;
-
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
 
     @Logging
     @GetMapping
