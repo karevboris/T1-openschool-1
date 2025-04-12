@@ -1,7 +1,7 @@
 package com.openschool.hw.controller;
 
-import com.openschool.hw.aspect.annotation.Logging;
-import com.openschool.hw.dto.TaskDto;
+import com.openschool.hw.starter.aspect.annotation.Logging;
+import com.openschool.hw.starter.dto.TaskDto;
 import com.openschool.hw.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

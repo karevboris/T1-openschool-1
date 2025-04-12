@@ -1,7 +1,7 @@
 package com.openschool.hw.config;
 
 
-import com.openschool.hw.dto.TaskDto;
+import com.openschool.hw.starter.dto.TaskDto;
 import com.openschool.hw.kafka.KafkaTaskProducer;
 import com.openschool.hw.kafka.MessageDeserializer;
 import lombok.extern.slf4j.Slf4j;

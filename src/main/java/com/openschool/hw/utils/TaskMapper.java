@@ -1,7 +1,7 @@
 package com.openschool.hw.utils;
 
-import com.openschool.hw.dto.TaskDto;
-import com.openschool.hw.model.Task;
+import com.openschool.hw.starter.dto.TaskDto;
+import com.openschool.hw.starter.model.Task;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +15,13 @@ public class TaskMapper {
     }
 
     public TaskDto mapToDto(Task task) {
-        return TaskDto.builder()
-                .id(task.getId())
-                .title(task.getTitle())
-                .description(task.getDescription())
-                .userId(task.getUserId())
-                .status(task.getStatus())
-                .build();
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(task.getId());
+        taskDto.setTitle(task.getTitle());
+        taskDto.setDescription(task.getDescription());
+        taskDto.setUserId(task.getUserId());
+        taskDto.setStatus(task.getStatus());
+        return taskDto;
     }
 
     public Task mapToTask(TaskDto taskDto) {

@@ -1,6 +1,6 @@
 package com.openschool.hw.kafka;
 
-import com.openschool.hw.dto.TaskDto;
+import com.openschool.hw.starter.dto.TaskDto;
 import com.openschool.hw.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
