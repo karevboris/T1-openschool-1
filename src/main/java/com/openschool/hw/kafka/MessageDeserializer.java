@@ -13,10 +13,6 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class MessageDeserializer<T> extends JsonDeserializer<T> {
 
-    private String getMessage(byte[] date) {
-        return new String(date, StandardCharsets.UTF_8);
-    }
-
     @Override
     public T deserialize(String topic, Headers headers, byte[] data) {
         try {
