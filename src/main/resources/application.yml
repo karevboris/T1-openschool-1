@@ -29,3 +29,7 @@ task:
       email_notification: task_email_notification
     listener:
       poll-timeout: 1000
+
+log:
+  level: ERROR
+  enabled: true
