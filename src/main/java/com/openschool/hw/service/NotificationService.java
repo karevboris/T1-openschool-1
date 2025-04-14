@@ -1,6 +1,6 @@
 package com.openschool.hw.service;
 
-import com.openschool.hw.starter.dto.TaskDto;
+import com.openschool.hw.dto.TaskDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;

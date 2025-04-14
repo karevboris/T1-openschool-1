@@ -1,8 +1,8 @@
 package com.openschool.hw.service;
 
-import com.openschool.hw.starter.dto.TaskDto;
+import com.openschool.hw.dto.TaskDto;
 import com.openschool.hw.kafka.KafkaTaskProducer;
-import com.openschool.hw.starter.model.Task;
+import com.openschool.hw.model.Task;
 import com.openschool.hw.repository.TaskRepository;
 import com.openschool.hw.utils.TaskMapper;
 import lombok.RequiredArgsConstructor;
