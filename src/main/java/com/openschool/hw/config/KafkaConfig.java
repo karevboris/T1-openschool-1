@@ -30,9 +30,9 @@ import java.util.Map;
 @Slf4j
 @Configuration
 public class KafkaConfig {
-    @Value("task")
+    @Value("${task.kafka.consumer.group-id}")
     private String groupId;
-    @Value("${task.kafka.bootstrap.server}")
+    @Value("${spring.kafka.bootstrap-servers}")
     private String server;
     @Value("${task.kafka.session.timeout.ms:15000}")
     private String sessionTimeout;
