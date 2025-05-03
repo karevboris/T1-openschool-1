@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:latest:///test_db
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: test@gmail.com
+    password:
+    properties:
+      mail: { smtp: { auth: true, starttls: { enable: true } } }
+
+task:
+  scan-path: com.openschool.hw
+  kafka:
+    consumer:
+      group-id: test_task
+      max.poll.records: 10
+    producer:
+      enable: true
+    topic:
+      updating: test_task_updating
+      email_notification: test_task_email_notification
+    listener:
+      poll-timeout: 1000
+
+log:
+  level: ERROR
+  enabled: true

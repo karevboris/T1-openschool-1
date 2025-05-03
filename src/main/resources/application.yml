@@ -13,12 +13,12 @@ spring:
     password:
     properties:
       mail: { smtp: { auth: true, starttls: { enable: true } } }
+  kafka:
+      bootstrap-servers: localhost:9092
 
 task:
   scan-path: com.openschool.hw
   kafka:
-    bootstrap:
-      server: localhost:9092
     consumer:
       group-id: task
       max.poll.records: 10
